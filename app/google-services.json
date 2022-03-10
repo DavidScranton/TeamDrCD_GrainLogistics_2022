@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "515181984390",
+    "project_id": "drcd-bdb19",
+    "storage_bucket": "drcd-bdb19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:515181984390:android:c09dbcb8fa12d0e36def07",
+        "android_client_info": {
+          "package_name": "com.example.teamdrcd_grainlogistics_2022"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "515181984390-ddf0f89u6r1ff8558qoru7lpurlr10hi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANn1mUfVJt2Lz2gujJtKbOVhluTwbWTQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "515181984390-ddf0f89u6r1ff8558qoru7lpurlr10hi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
