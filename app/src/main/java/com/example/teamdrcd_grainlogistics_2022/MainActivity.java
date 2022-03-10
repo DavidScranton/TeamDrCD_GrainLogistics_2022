@@ -2,11 +2,19 @@ package com.example.teamdrcd_grainlogistics_2022;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -34,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
     }
+
+    public void onClick(View v){
+        startActivity(new Intent(MainActivity.this, MapsActivity.class));
+    }
+
 
     private void updateUI(FirebaseUser currentUser) {
 
