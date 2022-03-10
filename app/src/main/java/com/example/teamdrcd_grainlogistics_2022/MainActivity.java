@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
     }
 
-    public void newUser(View view) {
+    public void NewUser(View view) {
         Intent intent = new Intent(this, NewUser.class);
         startActivity(intent);
     }
