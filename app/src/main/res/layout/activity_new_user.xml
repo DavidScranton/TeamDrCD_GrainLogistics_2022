@@ -13,6 +13,10 @@
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="30sp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,6 +57,30 @@
 " />
         </LinearLayout>
 
+        <EditText
+            android:id="@+id/editTextTextPersonName2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/editTextTextPersonName8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Comfirm Password"
+            android:inputType="textPersonName" />
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -68,8 +96,18 @@
         <Button
             android:id="@+id/button3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Join an exsisting farm" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Join an exsisting farm"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Create a new farm"
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
