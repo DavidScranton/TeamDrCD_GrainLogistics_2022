@@ -1,8 +1,11 @@
 package com.example.teamdrcd_grainlogistics_2022;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.MotionEvent;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -11,6 +14,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.teamdrcd_grainlogistics_2022.databinding.ActivityMapsBinding;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -43,9 +48,63 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
+        // Add a marker in Bettendorf and move the camera
         LatLng quadcities = new LatLng(42, -90);
         mMap.addMarker(new MarkerOptions().position(quadcities).title("Marker in Bettendorf"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(quadcities));
+
+        //test on touch coordinates
+        String[] locs = new String[4];
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(@NonNull LatLng point) {
+                Log.d("DEBUG", point.toString());
+                if(locs[0] == null){
+                    locs[0] = point.toString();
+                } else if(locs[1] == null){
+                    locs[1] = point.toString();
+                } else if(locs[2] == null){
+                    locs[2] = point.toString();
+                } else if(locs[3] == null){
+                    locs[3] = point.toString();
+                    markArea(locs);
+                }
+            }
+        });
+    }
+    public void markArea(String[] locs){
+        double lat1 = 0;
+        double lng1 = 0;
+        double lat2 = 0;
+        double lng2 = 0;
+        double lat3 = 0;
+        double lng3 = 0;
+        double lat4 = 0;
+        double lng4 = 0;
+        for(int i = 0;i<locs.length;i++){
+            String x = locs[i];
+            double lat = Double.parseDouble(x.substring(x.indexOf("(") + 1, x.indexOf("(") + 8));
+            double lng = Double.parseDouble(x.substring(x.indexOf(",")+1, x.indexOf(",") + 8));
+            if(i == 0) {
+                lat1 = lat;
+                lng1 = lng;
+            } else if(i == 1) {
+                lat2 = lat;
+                lng2 = lng;
+            } else if(i == 2) {
+                lat3 = lat;
+                lng3 = lng;
+            } else if(i == 3) {
+                lat4 = lat;
+                lng4 = lng;
+            }
+        }
+        Polygon polygon1 = mMap.addPolygon(new PolygonOptions().clickable(true)
+                .add(
+                        new LatLng(lat1, lng1),
+                        new LatLng(lat2, lng2),
+                        new LatLng(lat3, lng3),
+                        new LatLng(lat4, lng4)));
+        polygon1.setStrokeColor(0xff388E3C);
     }
 }
