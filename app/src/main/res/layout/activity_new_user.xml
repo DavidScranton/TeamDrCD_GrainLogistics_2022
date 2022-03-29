@@ -10,6 +10,7 @@
         android:layout_width="409dp"
         android:layout_height="729dp"
         android:orientation="vertical"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
@@ -78,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Comfirm Password"
+            android:hint="Confirm Password"
             android:inputType="textPersonName" />
 
         <Space
@@ -107,6 +108,15 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Create a new farm"
+            android:textColor="@android:color/black" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:onClick="submit"
+            android:text="Submit"
             android:textColor="@android:color/black" />
 
     </LinearLayout>
