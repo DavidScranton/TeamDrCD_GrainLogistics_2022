@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.*;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 
@@ -21,6 +22,9 @@ public class NewUser extends AppCompatActivity {
     private EditText emailBox;
     private EditText passwordBox1;
     private EditText passwordBox2;
+    private EditText lastName;
+    private EditText phoneNum;
+
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Override
@@ -41,8 +45,7 @@ public class NewUser extends AppCompatActivity {
     }
 
     public void submit(View view) {
-        //firstName = findViewById(R.id.editTextTextPersonName);
-        //String fName = firstName.getText().toString();
+
 
 
         emailBox = findViewById(R.id.editTextTextPersonName2);
@@ -60,11 +63,6 @@ public class NewUser extends AppCompatActivity {
             password = password1;
         }
 
-
-        //DatabaseReference myRef = database.getReference("/users/" + "" + "/First Name");
-        //myRef.setValue(message);
-
-
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -74,6 +72,23 @@ public class NewUser extends AppCompatActivity {
                             //Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            assert user != null;
+                            String uid = user.getUid();
+
+                            firstName = findViewById(R.id.editTextTextPersonName4);
+                            String fName = firstName.getText().toString();
+                            DatabaseReference myRef = database.getReference("/users/" + uid + "/First Name");
+                            myRef.setValue(fName);
+
+                            lastName = findViewById(R.id.editTextTextPersonName5);
+                            String lName = lastName.getText().toString();
+                            DatabaseReference myRef1 = database.getReference("/users/" + uid + "/Last Name");
+                            myRef1.setValue(lName);
+
+                            phoneNum = findViewById(R.id.editTextTextPersonName7);
+                            Long pn = Long.parseLong(phoneNum.getText().toString());
+                            DatabaseReference myRef2 = database.getReference("/users/" + uid + "/Phone Number");
+                            myRef2.setValue(pn);
                         } else {
                             // If sign in fails, display a message to the user.
                             //Log.w(TAG, "createUserWithEmail:failure", task.getException());
