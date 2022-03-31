@@ -16,10 +16,16 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 
+import java.util.ArrayList;
+
 public class FarmSetUp extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
+    //private int[] colors = new int[0xff388E3C];
+    private ArrayList<Polygon> polyList= new ArrayList<Polygon>();
+    String[] locs = new String[4];
+    Polygon polygon1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +58,7 @@ public class FarmSetUp extends FragmentActivity implements OnMapReadyCallback {
         mMap.addMarker(new MarkerOptions().position(quadcities).title("Marker in Bettendorf"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(quadcities));
 
-        //test on touch coordinates
-        String[] locs = new String[4];
+        //on touch stores coordinates to send to make a polygon
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(@NonNull LatLng point) {
@@ -67,11 +72,11 @@ public class FarmSetUp extends FragmentActivity implements OnMapReadyCallback {
                 } else if(locs[3] == null){
                     locs[3] = point.toString();
                     markArea(locs);
-
                 }
             }
         });
     }
+    //takes in a list of coordinate strings and uses them to make a polygon
     public void markArea(String[] locs){
         double lat1 = 0;
         double lng1 = 0;
@@ -99,12 +104,28 @@ public class FarmSetUp extends FragmentActivity implements OnMapReadyCallback {
                 lng4 = lng;
             }
         }
-        Polygon polygon1 = mMap.addPolygon(new PolygonOptions().clickable(true)
+        polygon1 = mMap.addPolygon(new PolygonOptions().clickable(true)
                 .add(
                         new LatLng(lat1, lng1),
                         new LatLng(lat2, lng2),
                         new LatLng(lat3, lng3),
                         new LatLng(lat4, lng4)));
         polygon1.setStrokeColor(0xff388E3C);
+    }
+    public void addPoly(){
+        Polygon storePoly = polygon1;
+        polyList.add(storePoly);
+        polygon1.remove();
+        locs[0] = null;
+        locs[1] = null;
+        locs[2] = null;
+        locs[3] = null;
+    }
+    public void resetPoly(){
+        polygon1.remove();
+        locs[0] = null;
+        locs[1] = null;
+        locs[2] = null;
+        locs[3] = null;
     }
 }
