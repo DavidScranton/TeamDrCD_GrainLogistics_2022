@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/email"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,18 +34,17 @@
         tools:ignore="MissingConstraints" />
 
     <Button
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:id="@+id/login_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:background="#367C2B"
         android:backgroundTint="#367C2B"
         android:fontFamily="sans-serif"
         android:onClick="login"
         android:text="@string/login"
         android:textAlignment="center"
-        android:textColor="@android:color/secondary_text_dark_nodisable"
-        android:textColorHint="#367C2B"
+        android:textColor="@color/white"
         android:textStyle="bold"
         app:iconTint="#367C2B"
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword2"
@@ -86,7 +85,8 @@
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword2"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editTextTextPassword2"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        android:onClick="forgot"/>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
