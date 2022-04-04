@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            String suc = "Login Successful!";
+                            String suc = "";
                             final TextView helloTextView = (TextView) findViewById(R.id.textView);
                             helloTextView.setText(suc);
                             FirebaseUser user = mAuth.getCurrentUser();
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
                             //Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
                                     //Toast.LENGTH_SHORT).show();
                             //updateUI(null);
-                            String suc = "Login Failed!";
+                            String suc = "Login Failed. Your email or password was incorrect.";
                             final TextView helloTextView = (TextView) findViewById(R.id.textView);
                             helloTextView.setText(suc);
                         }
