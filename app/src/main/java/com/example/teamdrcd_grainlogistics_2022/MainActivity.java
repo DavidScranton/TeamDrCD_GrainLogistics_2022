@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void updateUI(FirebaseUser currentUser) {
-
+        startActivity(new Intent(MainActivity.this, MapsActivity.class));
     }
 
     public void login(View view) {
