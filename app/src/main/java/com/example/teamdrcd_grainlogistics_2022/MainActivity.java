@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
+
+
+
     }
 
     public void NewUser(View view) {
@@ -40,16 +43,13 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
          //Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
+        //updateUI(currentUser);
 
-    public void onClick(View v){
-        startActivity(new Intent(MainActivity.this, MapsActivity.class));
     }
 
 
     private void updateUI(FirebaseUser currentUser) {
-
+        startActivity(new Intent(MainActivity.this, MapsActivity.class));
     }
 
     public void login(View view) {
@@ -81,6 +81,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 );
+    }
+
+    public void forgot(View view) {
+        Intent intent = new Intent(this, forgot_password.class);
+        startActivity(intent);
     }
 
 }
