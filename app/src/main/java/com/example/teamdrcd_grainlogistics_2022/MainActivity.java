@@ -29,9 +29,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAuth = FirebaseAuth.getInstance();
+
+
+
     }
 
-    public void newUser(View view) {
+    public void NewUser(View view) {
         Intent intent = new Intent(this, NewUser.class);
         startActivity(intent);
     }
@@ -40,11 +43,8 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
          //Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
-    }
+        //updateUI(currentUser);
 
-    public void onClick(View v){
-        startActivity(new Intent(MainActivity.this, MapsActivity.class));
     }
 
 
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            String suc = "Login Successful!";
+                            String suc = "";
                             final TextView helloTextView = (TextView) findViewById(R.id.textView);
                             helloTextView.setText(suc);
                             FirebaseUser user = mAuth.getCurrentUser();
@@ -74,13 +74,18 @@ public class MainActivity extends AppCompatActivity {
                             //Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
                                     //Toast.LENGTH_SHORT).show();
                             //updateUI(null);
-                            String suc = "Login Failed!";
+                            String suc = "Login Failed. Your email or password was incorrect.";
                             final TextView helloTextView = (TextView) findViewById(R.id.textView);
                             helloTextView.setText(suc);
                         }
                     }
                 }
                 );
+    }
+
+    public void forgot(View view) {
+        Intent intent = new Intent(this, forgot_password.class);
+        startActivity(intent);
     }
 
 }

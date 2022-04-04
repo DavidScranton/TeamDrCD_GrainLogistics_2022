@@ -1,14 +1,21 @@
 package com.example.teamdrcd_grainlogistics_2022;
 
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.teamdrcd_grainlogistics_2022.databinding.ActivityMapsBinding;
@@ -48,5 +55,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng quadcities = new LatLng(42, -90);
         mMap.addMarker(new MarkerOptions().position(quadcities).title("Marker in Bettendorf"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(quadcities));
+
+        // Add a marker in Sydney and move the camera
+        LatLng Tractor1 = new LatLng(41.557579, -90.495911);
+        mMap.addMarker(new MarkerOptions().position(Tractor1).title("Tractor #1")
+                // below line is use to add custom marker on our map.
+                .icon(BitmapFromVector(getApplicationContext(), R.drawable.ic_baseline_agriculture_24)));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(Tractor1));
+    }
+
+    private BitmapDescriptor BitmapFromVector(Context context, int vectorResId) {
+        // below line is use to generate a drawable.
+        Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
+
+        // below line is use to set bounds to our vector drawable.
+        vectorDrawable.setBounds(20, 20, vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
+
+        // below line is use to create a bitmap for our
+        // drawable which we have added.
+        Bitmap bitmap = Bitmap.createBitmap(vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+
+        // below line is use to add bitmap in our canvas.
+        Canvas canvas = new Canvas(bitmap);
+
+        // below line is use to draw our
+        // vector drawable in canvas.
+        vectorDrawable.draw(canvas);
+
+        // after generating our bitmap we are returning our bitmap.
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 }
