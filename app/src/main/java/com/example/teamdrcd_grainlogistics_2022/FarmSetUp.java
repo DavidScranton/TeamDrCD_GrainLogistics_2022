@@ -112,6 +112,7 @@ public class FarmSetUp extends FragmentActivity implements OnMapReadyCallback {
                         new LatLng(lat4, lng4)));
         polygon1.setStrokeColor(0xff388E3C);
     }
+    //adds the polygon to a permanently stored list
     public void addPoly(){
         Polygon storePoly = polygon1;
         polyList.add(storePoly);
@@ -121,6 +122,7 @@ public class FarmSetUp extends FragmentActivity implements OnMapReadyCallback {
         locs[2] = null;
         locs[3] = null;
     }
+    //gets rid of the current polygon
     public void resetPoly(){
         polygon1.remove();
         locs[0] = null;
