@@ -7,4 +7,6 @@
     <string name="email">Email</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_activity_farm_set_up">FarmSetUp</string>
+    <string name="reset">Reset</string>
+    <string name="add">add</string>
 </resources>

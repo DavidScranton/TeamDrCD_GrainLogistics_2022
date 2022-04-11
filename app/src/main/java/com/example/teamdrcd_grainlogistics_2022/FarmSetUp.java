@@ -2,6 +2,8 @@ package com.example.teamdrcd_grainlogistics_2022;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
@@ -12,6 +14,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
@@ -23,21 +26,23 @@ public class FarmSetUp extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
     //private int[] colors = new int[0xff388E3C];
-    private ArrayList<Polygon> polyList= new ArrayList<Polygon>();
+    private ArrayList<PolygonOptions> polyList= new ArrayList<>();
     String[] locs = new String[4];
+    PolygonOptions polyStore;
     Polygon polygon1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMapsBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
+        //binding = ActivityMapsBinding.inflate(getLayoutInflater());
+        //setContentView(binding.getRoot());
+        setContentView(R.layout.activity_farm_set_up);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
     /**
@@ -55,8 +60,11 @@ public class FarmSetUp extends FragmentActivity implements OnMapReadyCallback {
 
         // Add a marker in Bettendorf and move the camera
         LatLng quadcities = new LatLng(42, -90);
-        mMap.addMarker(new MarkerOptions().position(quadcities).title("Marker in Bettendorf"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(quadcities));
+        mMap.addMarker(new MarkerOptions().position(quadcities));
+
+        for(PolygonOptions x : polyList){
+            mMap.addPolygon(x);
+        }
 
         //on touch stores coordinates to send to make a polygon
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -104,17 +112,18 @@ public class FarmSetUp extends FragmentActivity implements OnMapReadyCallback {
                 lng4 = lng;
             }
         }
-        polygon1 = mMap.addPolygon(new PolygonOptions().clickable(true)
+        polyStore = new PolygonOptions().clickable(true)
                 .add(
                         new LatLng(lat1, lng1),
                         new LatLng(lat2, lng2),
                         new LatLng(lat3, lng3),
-                        new LatLng(lat4, lng4)));
+                        new LatLng(lat4, lng4));
+        polygon1 = mMap.addPolygon(polyStore);
         polygon1.setStrokeColor(0xff388E3C);
     }
     //adds the polygon to a permanently stored list
-    public void addPoly(){
-        Polygon storePoly = polygon1;
+    public void addPoly(View view){
+        PolygonOptions storePoly = polyStore;
         polyList.add(storePoly);
         polygon1.remove();
         locs[0] = null;
@@ -123,7 +132,7 @@ public class FarmSetUp extends FragmentActivity implements OnMapReadyCallback {
         locs[3] = null;
     }
     //gets rid of the current polygon
-    public void resetPoly(){
+    public void resetPoly(View view){
         polygon1.remove();
         locs[0] = null;
         locs[1] = null;
