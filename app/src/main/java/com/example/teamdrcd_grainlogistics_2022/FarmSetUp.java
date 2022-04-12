@@ -27,9 +27,9 @@ public class FarmSetUp extends FragmentActivity implements OnMapReadyCallback {
     private ActivityMapsBinding binding;
     //private int[] colors = new int[0xff388E3C];
     private ArrayList<PolygonOptions> polyList= new ArrayList<>();
-    String[] locs = new String[4];
-    PolygonOptions polyStore;
-    Polygon polygon1;
+    private String[] locs = new String[4];
+    private PolygonOptions polyStore;
+    private Polygon polygon1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,18 +42,8 @@ public class FarmSetUp extends FragmentActivity implements OnMapReadyCallback {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -61,10 +51,6 @@ public class FarmSetUp extends FragmentActivity implements OnMapReadyCallback {
         // Add a marker in Bettendorf and move the camera
         LatLng quadcities = new LatLng(42, -90);
         mMap.addMarker(new MarkerOptions().position(quadcities));
-
-        for(PolygonOptions x : polyList){
-            mMap.addPolygon(x);
-        }
 
         //on touch stores coordinates to send to make a polygon
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
